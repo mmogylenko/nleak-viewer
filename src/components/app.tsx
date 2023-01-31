@@ -1,6 +1,6 @@
 import * as React from 'react';
 import BLeakResults from '../lib/results';
-import {default as HeapGrowthGraph, isRankingEvaluationComplete} from './heap_growth_graph';
+import {isRankingEvaluationComplete} from './heap_growth_graph';
 import HeapGrowthGraphV2 from './heap_growth_graph_v2';
 import LeakRootsAndStackTraces from './leak_roots_and_stack_traces';
 import SourceCodeViewer from './source_code_view';
@@ -10,7 +10,7 @@ import StackTraceManager from '../model/stack_trace_manager';
 import GrowthReductionTable from './growth_reduction_table';
 import GrowthReductionGraph from './growth_reduction_graph';
 import SummaryPieGraph from './summary_pie_graph';
-import { relative } from 'path';
+//import { relative } from 'path';
 
 const enum ViewState {
   WAIT_FOR_FILE,

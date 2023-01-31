@@ -5,16 +5,19 @@
  * modules for the BLeak agent.
  */
 
+/*
 interface Object {
   getOwnPropertyDescriptors(obj: any): PropertyDescriptor[];
 }
+*/
 
 /**
  * LeakRoot ID => stack traces.
- */
+
 interface GrowingStackTraces {
   [id: number]: string[];
 }
+ */
 
 /**
  * Represents the type of a heap path segment.
@@ -42,7 +45,7 @@ export enum PathSegmentType {
 /**
  * Represents a segment in a heap path.
  */
-interface IPathSegment {
+export interface IPathSegment {
   type: PathSegmentType;
   indexOrName: string | number;
 }
@@ -69,4 +72,7 @@ interface IPathTreeGrowing extends IPathSegment {
  * List of growing paths from the global window objects, expressed in
  * tree form.
  */
+
+/*
 type IPathTrees = IPathTree[];
+*/

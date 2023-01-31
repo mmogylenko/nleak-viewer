@@ -1,6 +1,7 @@
 // import MITMProxy from 'mitmproxy';
 import HeapSnapshotParser from '../lib/heap_snapshot_parser';
 import TimeLog from './time_log';
+import { IPathSegment } from './extensions';
 
 /**
  * A NLeak driver interface.

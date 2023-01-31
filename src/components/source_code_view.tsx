@@ -1,17 +1,17 @@
 import * as React from 'react';
 import FileList from './file_list/file_list';
 import SourceFileManager from '../model/source_file_manager';
-import {default as AceEditor, Annotation as AceAnnotation} from 'react-ace';
+import AceEditor, { IAnnotation } from 'react-ace';
 import StackTraceManager from '../model/stack_trace_manager';
 import SourceFile from '../model/source_file';
 import StackFrame from '../model/stack_frame';
 import pathToString from '../lib/path_to_string';
 import Location from '../model/location';
-import {acequire} from 'brace';
 import 'brace/mode/javascript';
 import 'brace/theme/github';
 import 'brace/ext/searchbox';
-const Range = acequire('ace/range').Range;
+import * as ace from 'ace-builds/src-noconflict/ace';
+const { Range } = ace.require('ace/range');
 
 interface SourceCodeViewProps {
   files: SourceFileManager;
@@ -118,15 +118,25 @@ export default class SourceCodeView extends React.Component<SourceCodeViewProps,
     const frames = this.state.highlightedFrames;
 
     // Display annotations for file.
-    const annotations = frames.map((f): AceAnnotation => {
+    const annotations = frames.map((f): IAnnotation => {
       const ogLocation = f.getOriginalLocation();
       const location = prettyPrint ? f.getFormattedLocation() : f.getOriginalLocation();
       const leaks = this.props.stackTraces.getLeaksForLocation(ogLocation);
-      return Object.assign({
-        type: 'error',
-        text: `Contributes to memory leaks:\n${leaks.map((l) => pathToString(l.paths[0])).join(",\n")}`
-      }, location.toAceEditorLocation());
+
+      // return Object.assign({
+      //   type: "error",
+      //   text: `Contributes to memory leaks:\n${leaks.map((l) => pathToString(l.paths[0])).join(",\n")}`
+      // }, location.toAceEditorLocation());
+
+      return {
+        type: "error",
+        text: `Contributes to memory leaks:\n${leaks.map((l) => pathToString(l.paths[0])).join(",\n")}`,
+        row: location.toAceEditorLocation().row,
+        column: location.toAceEditorLocation().column,
+      }
     });
+
+
     session.setAnnotations(annotations);
 
     // Remove old markers.

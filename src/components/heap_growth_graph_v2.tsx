@@ -2,7 +2,7 @@ import * as React from 'react';
 import ReactEcharts from "echarts-for-react";
 
 import BLeakResults from "../lib/results";
-import { SnapshotSizeSummary } from "../common/interfaces";
+//import { SnapshotSizeSummary } from "../common/interfaces";
 
 // const nleakResult = require("./test_data/result.json");
 const BYTES_PER_MB = 1024 * 1024;
